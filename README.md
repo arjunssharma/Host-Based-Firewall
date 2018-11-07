@@ -16,7 +16,7 @@ Steps to run the code:
 
 NOTE:
 -------
-i) Loggers are used to log invalid input or exceptions.
-ii) Time Complexity is O(n).
-iii) Space Complexity is O(n). 
-iv) Few JUnit test cases are written (test/ directory).
+* Loggers are used to log invalid input or exceptions.
+* Time Complexity is O(n).
+* Space Complexity is O(n). 
+* Few JUnit test cases are written (test/ directory).
