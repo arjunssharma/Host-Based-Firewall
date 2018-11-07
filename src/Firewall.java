@@ -39,7 +39,7 @@ public class Firewall {
 				continue;
 			}
 			
-			boolean accepts = firewall.accept(str[0], str[1], str[2], str[3]);
+			boolean accepts = firewall.accept_packet(str[0], str[1], str[2], str[3]);
 			System.out.println(accepts);
 		}
 		
@@ -47,7 +47,7 @@ public class Firewall {
 			br.close();
 	}
 	
-	private boolean accept(String direction, String protocol, String port, String ip_address) throws Exception {
+	public boolean accept_packet(String direction, String protocol, String port, String ip_address) throws Exception {
 		for (Parameter input : rules) {
 			if (input.getDirection().equalsIgnoreCase(direction) && input.getProtocol().equalsIgnoreCase(protocol)
 					&& input.checkPortRange(port) && input.checkIPRange(ip_address))
@@ -56,7 +56,7 @@ public class Firewall {
 		return false;
 	}
 	
-	private List<Parameter> readCsv(String path) throws Exception {
+	public List<Parameter> readCsv(String path) throws Exception {
 		List<Parameter> rules = new ArrayList<>();
 		BufferedReader br = null;
 		Parameter p = null;
@@ -93,12 +93,16 @@ public class Firewall {
 		return rules;
 	}
 	
-	private boolean isDirectionValid(String direction) {
+	public boolean isDirectionValid(String direction) {
 		return (direction.equalsIgnoreCase("inbound") || direction.equalsIgnoreCase("outbound"));
 	}
 	
-	private boolean isProtocolValid(String protocol) {
+	public boolean isProtocolValid(String protocol) {
 		return (protocol.equalsIgnoreCase("tcp") || protocol.equalsIgnoreCase("udp"));
+	}
+	
+	public void setRules(List<Parameter> rules) {
+		Firewall.rules = rules;
 	}
 }
 
